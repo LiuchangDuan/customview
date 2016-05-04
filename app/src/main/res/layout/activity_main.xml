@@ -7,10 +7,12 @@
     >
 
     <com.example.customview.view.CustomTitleView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         custom:titleText="3721"
+        android:padding="10dp"
         custom:titleTextColor1="#ff0000"
+        android:layout_centerInParent="true"
         custom:titleTextSize="40sp"
         />
 
