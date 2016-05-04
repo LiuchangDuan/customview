@@ -2,6 +2,7 @@ package com.example.customview.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -89,7 +90,20 @@ public class CustomTitleView extends View {
     }
 
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        mPaint.setColor(Color.YELLOW);
+        canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+
+        mPaint.setColor(mTitleTextColor1);
+        canvas.drawText(mTitleText, getWidth() / 2 - mBound.width() / 2, getHeight() / 2 + mBound.height() / 2, mPaint);
+
+    }
 
 
 }
