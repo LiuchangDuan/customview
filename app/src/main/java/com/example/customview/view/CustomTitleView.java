@@ -12,28 +12,32 @@ import android.view.View;
 
 import com.example.customview.R;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 /**
  * Created by Administrator on 2016/5/4.
  */
 public class CustomTitleView extends View {
 
     /**
-     *  文本
+     * 文本
      */
     private String mTitleText;
 
     /**
-     *  文本的颜色
+     * 文本的颜色
      */
     private int mTitleTextColor1;
 
     /**
-     *  文本的大小
+     * 文本的大小
      */
     private int mTitleTextSize;
 
     /**
-     *  绘制时控制文本绘制的范围
+     * 绘制时控制文本绘制的范围
      */
     private Rect mBound;
     private Paint mPaint;
@@ -87,6 +91,29 @@ public class CustomTitleView extends View {
         mBound = new Rect();
         mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
 
+        this.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mTitleText = randomText();
+                postInvalidate();
+            }
+        });
+    }
+
+    private String randomText() {
+        Random random = new Random();
+        Set<Integer> set = new HashSet<Integer>();
+        while (set.size() < 4) {
+            int randomInt = random.nextInt(10);
+            set.add(randomInt);
+        }
+        StringBuffer sb = new StringBuffer();
+        for (Integer i : set) {
+            sb.append("" + i);
+        }
+
+        return sb.toString();
     }
 
 
@@ -104,7 +131,7 @@ public class CustomTitleView extends View {
             mPaint.setTextSize(mTitleTextSize);
             mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
             float textWidth = mBound.width();
-            int desired = (int)(getPaddingLeft() + textWidth + getPaddingRight());
+            int desired = (int) (getPaddingLeft() + textWidth + getPaddingRight());
             width = desired;
         }
 
